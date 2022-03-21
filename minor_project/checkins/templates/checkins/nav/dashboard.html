@@ -1,0 +1,116 @@
+{% extends "checkins/nav/navbar.html" %}
+{% load static%}
+{% block head %}
+    <link rel="stylesheet" href="{% static 'checkins/nav/navbar-styles.css' %}">
+	<link rel="stylesheet" href="{% static 'checkins/nav/dashboard-styles.css' %}">
+{% endblock %}
+{% block main %}
+<body style="background-image: url({% static 'media/body-bg.svg' %});">
+
+    <div class="container">
+        <div class="table">
+            <table class="flatTable">
+                <tr class="titleTr">
+                  <th class="titleTd">EVENTS</th>
+                  <th colspan="3"></th>
+                  <th class="plusTd button"><i class='bx bx-plus-circle'></i></th>
+                </tr>
+                <tr class="headingTr">
+                  <td>TITLE</td>
+                  <td>DATE</td>
+                  <td>BUDGET</td>
+                  <td>DESCRIPTION</td>
+                  <th></th>
+                </tr>
+                {% if event_data %}
+                    {% for e in event_data %}
+                        {% if e.user == user.get_username %}
+                        <tr {% if e.current %} style="background-color: rgba(136, 217, 241, 0.3);" {% endif %}>
+                            <td>{{ e.title }}</td>
+                            <td>{{ e.date }}</td>
+                            <td>{{ e.budget }}</td>
+                            <td>{{ e.description }}</td>
+                            <td class="controlTd"><i class='bx bx-cog'></i>
+                                <div class="settingsIcons">
+                                    <span class="settingsIcon"><i class='bx bx-x-circle'></i></span>
+                                    <a href="{% url 'edit-event' e.id %}" class="button settingsIcon">
+                                        <i class='bx bx-edit' style="color: white;"></i>
+                                    </a>
+                                    <a href="{% url 'delete-event' e.id %}" class="settingsIcon">
+                                        <i class='bx bx-trash' style="color: red;"></i>
+                                    </a>
+                                </div> 
+                            </td>
+                        </tr>
+                        {% endif %}
+                    {% endfor%}
+                {% else %}
+                    <tr style="text-align: center;">
+                        <td rowspan="3" colspan="5">
+                            <img src="{% static 'media/empty-table.svg' %}">
+                        </td>
+                    </tr>
+                {% endif %}
+            </table>
+        </div>
+        <div id="sForm" class="sForm {% if form_data %}open{% endif %}">
+            <span class="button close"><i class='bx bx-x-circle'></i></span>
+            <h2 class="title">Add a New Event</h2>  
+    
+    
+            <div class="add-expense sFormPadding">        
+                <div class="add-expense-body">
+            
+                    <form class="form" action="{% if form_data %}{% url 'edit-event' form_data.id %}{% else %}{% url 'dashboard' %}{% endif %}" method="post">
+                        {% csrf_token %}
+                        <div class="group">
+                            <label for="title">Event Title</label>
+                            <input type="text" name="title" placeholder="Enter Title of Event"
+                            value="{% if form_data %}{{ form_data.title }}{% endif %}"/>
+                        </div>
+                        <div class="group">
+                            <label for="amount">Event Budget</label>
+                            <input type="number" name="amount" placeholder="Amount Available for Event"
+                            value="{% if form_data %}{{ form_data.budget }}{% endif %}"/>
+                        </div>
+                        <div class="group">
+                            <label for="date">Select Date of Event</label>
+                            <input class="form-control" id="date" name="date" type="date" 
+                            {% if date %}value="{{ date }}"{% endif %}/>
+                        </div>
+                        <div class="group">
+                            <label for="description">Event Description</label>
+                            <input type="text" name="description" placeholder="Enter Description"
+                            value="{% if form_data %}{{ form_data.description }}{% endif %}"/>
+                        </div>
+                        {% if user.is_authenticated %}
+                            <input id="user" name="user" type="text" value="{{ user.get_username }}" style="visibility: hidden;"/>
+                        {% endif %}
+                        <div class="group">
+                            <input type="submit" class="btn btn-blue" style="width: 40%; border: none;" value="Save"/>
+                        </div>
+                        
+                    </form>
+                </div>
+            </div>
+    
+    
+        </div>
+
+    </div>
+
+</body>
+{% endblock %}
+<script>
+    {% block jquery %}
+
+        $(".button").click(function () {
+            $("#sForm").toggleClass("open");   
+        });
+
+        $(".controlTd").click(function () {
+            $(this).children(".settingsIcons").toggleClass("display"); 
+            $(this).children(".settingsIcon").toggleClass("openIcon"); 
+        });
+    {% endblock %}
+</script>

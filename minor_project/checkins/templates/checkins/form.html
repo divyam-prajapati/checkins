@@ -1,0 +1,56 @@
+{% extends "checkins/template.html" %}
+{% load static%}
+{% block head %}
+<link rel="stylesheet" href="{% static 'checkins/form-styles.css' %}">
+{% endblock %}
+{% block content %}      
+{% load crispy_forms_tags %}         
+
+ 
+<main class="main" style="background-image: url({% static 'media/body-bg.svg' %});">
+  
+	<div class="login-box">
+
+		<h1 class="head" style="margin-top: 3em;">INVITATION FORM</h1>
+		
+		<form method="POST" enctype="multipart/form-data" class="form">
+			{% csrf_token %}
+			<div class="group">
+				<label for="event">Select Event</label>
+				<select name="event" required>
+					<option value="">Select</option>
+					{% for i in event_data %}
+						<option value="{{ i.title }}">{{ i.title }}</option>
+					{% endfor %}
+				</select>
+			</div>
+			{{ invite_form|crispy }}
+			<div class="svg-wrapper">
+				<svg height="40" width="150" xmlns="http://www.w3.org/2000/svg">
+				  <rect id="shape" height="40" width="150"/>
+				  <div id="text">
+					<button type="submit"><span class="spot"></span>Submit</button>
+				  </div>
+				</svg>
+			</div>
+		</form>
+
+  	</div>
+	<div id="animation" class="animation"></div>
+</main>
+<!-- https://assets10.lottiefiles.com/packages/lf20_x9svjl26/data.json -->
+{% endblock %}
+<script>
+	{% block jquery %}
+	
+		var animation = bodymovin.loadAnimation({
+		// animationData: { /* ... */ },
+		container: document.getElementById('animation'), // required
+		path: 'https://assets10.lottiefiles.com/packages/lf20_x9svjl26/data.json', // required
+		renderer: 'svg', // required
+		loop: true, // optional
+		autoplay: true, // optional
+		name: "Demo Animation", // optional
+		});
+	{% endblock %}
+</script>

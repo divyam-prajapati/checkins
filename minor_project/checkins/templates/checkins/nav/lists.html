@@ -1,0 +1,137 @@
+{% extends "checkins/nav/navbar.html" %}
+{% load static%}
+{% block head %}
+    <link rel="stylesheet" href="{% static 'checkins/nav/navbar-styles.css' %}">
+	<link rel="stylesheet" href="{% static 'checkins/nav/lists-styles.css' %}">
+{% endblock %}
+{% block main %}
+    <body style="background-image: url({% static 'media/body-bg.svg' %});">
+        <div class="container">
+
+            <div class="table">
+                <table class="flatTable">
+                    <tr class="titleTr">
+                      <th class="titleTd">CURRENT EVENT INVITES </th>
+                      <th colspan="4"></th>
+                      <th></th>
+                    </tr>
+                    <tr class="headingTr">
+                      <td>NAME</td>
+                      <td>EMAIL</td>
+                      <td>EVENT</td>
+                      <td>STATUS</td>
+                      <td>CHECKIN TYPE</td>
+                      <th></th>
+                    </tr>
+                    {% if current_invite_data %}
+                        {% for e in current_invite_data %}
+                        <tr>
+                            <td class="text">{{ e.name }}</td>
+                            <td  class="text">{{ e.email }}</td>
+                            <td  class="text">{{ e.event }}</td>
+                            {% if e.status %} <td  class="text">PRESENT</td>
+                            {% else %} <td  class="text">ABSENT</td>
+                            {% endif %}
+                            {% if e.checkinType == "FR" %} 
+                                <td class="icons i">
+                                    <i class='bx bx-check-shield' style="color: greenyellow;"></i>
+                                    <i class='bx bx-scan' style="color: red;"></i>
+                                </td>
+                            {% elif e.checkinType == "QR" %} 
+                                <td class="icons i">
+                                    <i class='bx bx-check-shield' style="color: red;"></i>
+                                    <i class='bx bx-scan' style="color: greenyellow;"></i>
+                                </td>
+                            {% elif e.checkinType == "both" %} 
+                                <td class="icons i">
+                                    <i class='bx bx-check-shield' style="color: greenyellow;"></i>
+                                    <i class='bx bx-scan' style="color: greenyellow;"></i>
+                                </td>
+                            {% else %} 
+                                <td class="icons i">
+                                    <i class='bx bx-check-shield' style="color: red;"></i>
+                                    <i class='bx bx-scan' style="color: red;"></i>
+                                </td>
+                            {% endif %}
+                            <th class="icons">
+                                <a href="{% url 'delete-invite' e.id %}" style="margin: auto auto; padding: 1em;">
+                                    <i class='bx bx-trash' style="color: red;"></i>
+                                </a>
+                            </th>
+                        </tr>
+                        {% endfor %}
+                    {% else %}
+                        <tr style="text-align: center;">
+                            <td rowspan="3" colspan="5">
+                                <img src="{% static 'media/empty-table.svg' %}">
+                            </td>
+                        </tr>
+                    {% endif %}
+                </table>
+            </div>
+
+            <div class="table">
+                <table class="flatTable">
+                    <tr class="titleTr">
+                      <th class="titleTd">INVITES LIST</th>
+                      <th colspan="4"></th>
+                      <th></th>
+                    </tr>
+                    <tr class="headingTr">
+                      <td>NAME</td>
+                      <td>EMAIL</td>
+                      <td>EVENT</td>
+                      <td>STATUS</td>
+                      <td>CHECKIN TYPE</td>
+                      <th></th>
+                    </tr>
+                    {% if invite_data %}
+                        {% for e in invite_data %}
+                        <tr>
+                            <td class="text">{{ e.name }}</td>
+                            <td  class="text">{{ e.email }}</td>
+                            <td  class="text">{{ e.event }}</td>
+                            {% if e.status %} <td  class="text">PRESENT</td>
+                            {% else %} <td  class="text">ABSENT</td>
+                            {% endif %}
+                            {% if e.checkinType == "FR" %} 
+                                <td class="icons i">
+                                    <i class='bx bx-check-shield' style="color: greenyellow;"></i>
+                                    <i class='bx bx-scan' style="color: red;"></i>
+                                </td>
+                            {% elif e.checkinType == "QR" %} 
+                                <td class="icons i">
+                                    <i class='bx bx-check-shield' style="color: red;"></i>
+                                    <i class='bx bx-scan' style="color: greenyellow;"></i>
+                                </td>
+                            {% elif e.checkinType == "both" %} 
+                                <td class="icons i">
+                                    <i class='bx bx-check-shield' style="color: greenyellow;"></i>
+                                    <i class='bx bx-scan' style="color: greenyellow;"></i>
+                                </td>
+                            {% else %} 
+                                <td class="icons i">
+                                    <i class='bx bx-check-shield' style="color: red;"></i>
+                                    <i class='bx bx-scan' style="color: red;"></i>
+                                </td>
+                            {% endif %}
+                            <th class="icons">
+                                <a href="{% url 'delete-invite' e.id %}" style="margin: auto auto; padding: 1em;">
+                                    <i class='bx bx-trash' style="color: red;"></i>
+                                </a>
+                            </th>
+                        </tr>
+                        {% endfor %}
+                    {% else %}
+                        <tr style="text-align: center;">
+                            <td rowspan="3" colspan="5">
+                                <img src="{% static 'media/empty-table.svg' %}">
+                            </td>
+                        </tr>
+                    {% endif %}
+                </table>
+            </div>
+
+        </div>
+    </body>
+{% endblock %}

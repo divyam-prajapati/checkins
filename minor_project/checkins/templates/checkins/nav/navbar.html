@@ -1,0 +1,83 @@
+{% extends "checkins/template.html" %}
+{% load static%}
+
+{% block content %} 
+<!-- background-image: url({% static 'media/body-bg.svg'%}); -->
+    <nav id="mySidebar" onmouseover="toggleSidebar()" onmouseout="toggleSidebar()" class="sidebar" style="background: rgba(48, 35, 145, 0.3);">
+		<div>
+			<ul class="nav_list">
+				<li class="logo_content" style="margin-bottom: 4em;">
+					<img src="{% static 'media/logo.svg'%}" id="btn" style="margin-top: 1em; height: 32px; width:32px;">
+					<div class="logo">
+						<p class="logo_name">Self-Checkins</p>
+					</div>
+				</li>
+				<li>
+					<a href="{% url 'dashboard' %}">
+						<i class='bx bx-home'></i>
+						<span class="links_name">Home</span>
+					</a>
+				</li>
+				<li>
+					<a href="{% url 'facereco' %}">
+						<i class='bx bx-wink-smile'></i>
+						<span class="links_name">Face Recognition</span>
+					</a>
+				</li>
+				<li>
+					<a href="{% url 'qr' %}">
+						<i class='bx bx-scan'></i>
+						<span class="links_name">QR Scan</span>
+					</a>
+				</li>
+				<li>
+					<a href="{% url 'statistics' %}">
+						<i class='bx bx-pie-chart-alt-2'></i>
+						<span class="links_name">Statistics</span>
+					</a>
+				</li>
+				<li>
+					<a href="{% url 'lists' %}">
+						<i class='bx bx-list-ul'></i>
+						<span class="links_name">Lists</span>
+					</a>
+				</li>
+				<li>
+					<a href="{% url 'profile' %}">
+						<i class='bx bx-user'></i>
+						<span class="links_name">Profile</span>
+					</a>
+				</li>
+				<li style="margin-top: 3em; margin-bottom: 3em;">
+					<a href="{% url 'logout' %}">
+						<i class='bx bx-log-out'></i>
+						<span class="links_name">Logout</span>
+					</a>
+				</li>
+			</ul>
+    	</div>
+
+    </nav>
+	<main id="main" class="main">
+		{% block main %}
+
+		{% endblock %}
+	</main>
+    <script>
+		var mini = true;
+		var sidebar = document.querySelector(".sidebar");
+		function toggleSidebar() {
+		if (mini) {
+			document.getElementById("mySidebar").style.width = "250px";
+			sidebar.classList.toggle("active");
+			this.mini = false;
+		} else {
+			sidebar.classList.toggle("active");
+			document.getElementById("mySidebar").style.width = "85px";
+			this.mini = true;
+		}
+		}
+
+	</script>
+
+{% endblock %}

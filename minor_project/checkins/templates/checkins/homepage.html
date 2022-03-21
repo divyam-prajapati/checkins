@@ -1,0 +1,46 @@
+{% extends "checkins/template.html" %}
+{% load static%}
+{% block head %}
+    <link rel="stylesheet" href="{% static 'checkins/homepage-styles.css' %}">
+{% endblock %}
+{% block content %}
+<body style="background-image: url({% static 'media/home-bg.svg' %}); " >
+    
+    <div class="container">
+        <nav class="header">
+            <div class="logo">
+                <img src="{% static 'media/logo-w.svg'%}" id="btn">
+                <p>Self Check-ins</p>
+            </div>
+            <ul>
+                <li>
+                    <div class="svg-wrapper">
+                        <svg height="40" width="150" xmlns="http://www.w3.org/2000/svg">
+                        <rect id="shape" height="32" width="120"/>
+                        <div id="text">
+                            <a href="{% url 'register' %}"><span class="spot"></span>Register</a>
+                        </div>
+                        </svg>
+                    </div>
+                </li>
+                <li>
+                    <div class="svg-wrapper">
+                        <svg height="40" width="150" xmlns="http://www.w3.org/2000/svg">
+                        <rect id="shape" height="32" width="120"/>
+                        <div id="text">
+                            <a href="{% url 'login' %}"><span class="spot"></span>Login</a>
+                        </div>
+                        </svg>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+        <main class="main">
+            <h1 class="glitch is-glitching" data-text="Face Recogntion">Face Recogntion</h1>
+            <h4 class="glitch is-glitching" data-text="Based Check-ins system">Based Check-ins system</h4>
+            <a href="{% url 'form' %}" class="btn">INVITATION FORM</a>
+        </main>
+    </div>
+</body>
+
+{% endblock %}

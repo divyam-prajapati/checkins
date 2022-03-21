@@ -1,0 +1,285 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Orbitron" , monospace;
+    letter-spacing: 2px;
+    list-style: none;
+    text-decoration: none;
+    color: #FFFAFF;
+}
+body {
+    width: 100vw;
+    font-family: "Orbitron" , monospace;
+    background-color: rgba(11, 19, 31, 0.1);
+    box-sizing: border-box;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+    color: #FFFAFF;
+}
+.header {
+    top: 0%;
+    position: sticky;
+    width: 100%;
+    padding-left: 1em;
+    padding-right: 1em;
+    /* border-top: #88D9F1 1px solid;
+    border-bottom: #88D9F1 1px solid;
+    background-color: rgba(136, 217, 241, 0.1); */
+    display: flex;
+    flex-direction: row;
+}
+nav ul {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    justify-content: space-evenly;
+    margin-left: 5em;
+}
+nav ul li {
+    margin: 2em;
+    font-weight: 500;
+    font-size: 1em;
+}
+
+.logo {
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
+    margin-left: 1em;
+    margin-bottom: 0.5em;
+}
+.logo img {
+    margin-top: 0em; 
+    height: 48px; 
+    width:48px;
+}
+.logo p {
+    margin-top: 0em; 
+    margin-left: 1em; 
+    font-size: 18px;
+}
+main {
+    width: 80%;
+    margin-left: 1.5em;
+}
+main h1 {
+    font-size: 4em;
+    cursor: pointer;
+    margin-top: 1em;
+    letter-spacing: 5px;
+}
+main h4 {
+    font-size: 2em;
+    cursor: pointer;
+    margin: 1em 0 6em 0;
+    letter-spacing: 3px;
+}
+/* Cyberpunk style button glitch */
+.btn,.btn::after {
+    padding: 1em 2em;
+    font-size:1em;
+    font-family: "Orbitron",monospace;
+    background:linear-gradient(45deg,transparent 5%,#FF013C 5%);
+    border:0;
+    color:#ffffff;
+    letter-spacing:3px;
+    line-height:72px;
+    box-shadow:6px 0px 0px #00E6F6;
+    outline:transparent;
+    position:relative;
+    cursor: pointer;
+}
+  
+.btn::after{
+    --slice-0:inset(50% 50% 50% 50%);
+    --slice-1:inset(80% -6px 0 0);
+    --slice-2:inset(50% -6px 30% 0);
+    --slice-3:inset(10% -6px 85% 0);
+    --slice-4:inset(40% -6px 43% 0);
+    --slice-5:inset(80% -6px 5% 0);
+    content:"INVITATION FORM";
+    display:block;
+    position:absolute;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+    background:linear-gradient(45deg,transparent 3%,#00E6F6 3%,#00E6F6 5%,#FF013C 5%);
+    text-shadow:-3px -3px 0px #F8F005,3px 3px 0px #00E6F6;
+    clip-path:var(--slice-0);
+    
+}
+  
+.btn:hover::after{
+    animation:1s glitch;
+    animation-timing-function:steps(2,end);
+}
+  
+@keyframes glitch{
+    0%{
+      clip-path:var(--slice-1);
+      transform:translate(-20px,-10px);
+    }
+    10%{
+      clip-path:var(--slice-3);
+      transform:translate(10px,10px);
+    }
+    20%{
+        clip-path:var(--slice-1);
+      transform:translate(-10px,10px);
+    }
+    30%{
+        clip-path:var(--slice-3);
+      transform:translate(0px,5px);
+    }
+    40%{
+        clip-path:var(--slice-2);
+      transform:translate(-5px,0px);
+    }
+    50%{
+        clip-path:var(--slice-3);
+      transform:translate(5px,0px);
+    }
+    60%{
+        clip-path:var(--slice-4);
+      transform:translate(5px,10px);
+    }
+    70%{
+        clip-path:var(--slice-2);
+      transform:translate(-10px,10px);
+    }
+    80%{
+        clip-path:var(--slice-5);
+      transform:translate(20px,-10px);
+    }
+    90%{
+        clip-path:var(--slice-1);
+      transform:translate(-10px,0px);
+    }
+    100%{
+        clip-path:var(--slice-1);
+      transform:translate(-20px,-10px);
+    }
+}
+/* Glitch Text */
+.glitch {
+    position: relative;
+    color: white;
+    mix-blend-mode: lighten;
+}
+.glitch:before, .glitch:after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    width: 100%;
+    clip: rect(0, 0, 0, 0);
+}
+.glitch:before {
+    left: -1px;
+    text-shadow: 1px 0 rgba(255, 0, 0, 0.7);
+}
+.glitch:after {
+    left: 1px;
+    text-shadow: -1px 0 rgba(0, 0, 255, 0.7);
+}
+.glitch:before {
+    text-shadow: 4px 0 rgba(255, 0, 0, 0.7);
+    animation: glitch-loop-1 0.8s infinite ease-in-out alternate-reverse;
+}
+.glitch:after {
+    text-shadow: -5px 0 rgba(0, 0, 255, 0.7);
+    animation: glitch-loop-2 0.8s infinite ease-in-out alternate-reverse;
+}
+@keyframes glitch-loop-1 {
+    0% {
+        clip: rect(36px, 9999px, 9px, 0);
+   }
+    25% {
+        clip: rect(25px, 9999px, 99px, 0);
+   }
+    50% {
+        clip: rect(50px, 9999px, 102px, 0);
+   }
+    75% {
+        clip: rect(30px, 9999px, 92px, 0);
+   }
+    100% {
+        clip: rect(91px, 9999px, 98px, 0);
+   }
+}
+@keyframes glitch-loop-2 {
+    0% {
+        top: -1px;
+        left: 1px;
+        clip: rect(65px, 9999px, 119px, 0);
+   }
+    25% {
+        top: -6px;
+        left: 4px;
+        clip: rect(79px, 9999px, 19px, 0);
+   }
+    50% {
+        top: -3px;
+        left: 2px;
+        clip: rect(68px, 9999px, 11px, 0);
+   }
+    75% {
+        top: 0px;
+        left: -4px;
+        clip: rect(95px, 9999px, 53px, 0);
+   }
+    100% {
+        top: -1px;
+        left: -1px;
+        clip: rect(31px, 9999px, 149px, 0);
+   }
+}
+/* NAV links */
+.spot {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+.svg-wrapper {
+    margin-top: 0;
+    position: relative;
+    width: 120px;
+    /*make sure to use same height/width as in the html*/
+    height: 48px;
+    display: inline-block;
+    border-radius: 3px;
+    margin-left: 5px;
+    margin-right: 5px;
+    margin: 0 auto;
+}
+#shape {
+    stroke-width: 6px;
+    fill: transparent;
+    stroke: #2555A7;
+    stroke-dasharray: 85 400;
+    stroke-dashoffset: -220;
+    transition: 1s all ease;
+}
+#text {
+    margin-top: -35px;
+    text-align: center;
+}
+.svg-wrapper:hover #shape {
+    stroke-dasharray: 50 0;
+    stroke-width: 3px;
+    stroke-dashoffset: 0;
+    stroke: #2EB297;
+}
+#text button {
+    color: #88D9F1;
+    background: transparent;
+    border: none;
+    text-decoration: none;
+    font-weight: 100;
+    font-size: 1.6em;
+}

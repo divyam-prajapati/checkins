@@ -1,0 +1,71 @@
+{% extends "checkins/nav/navbar.html" %}
+{% load static%}
+{% block head %}
+    <link rel="stylesheet" href="{% static 'checkins/nav/navbar-styles.css' %}">
+	<link rel="stylesheet" href="{% static 'checkins/nav/profile-styles.css' %}">
+{% endblock %}
+{% block main %}
+    <body style="background-image: url({% static 'media/body-bg.svg' %});">
+        <div class="content">
+            <div class="profile-box">
+                {% if user.is_authenticated %}
+                <div>
+                        <h2>Hello, {{ user.get_short_name }}</h2>
+                        <div class="user-box">
+                            <label for="username">Username:</label>
+                            <p>{{ user.get_username }}</p>
+                        </div>
+                        <div class="user-box">
+                            <label for="name">Name:</label>
+                            <p>{{ user.get_full_name }}</p>
+                        </div>
+                        <div class="user-box">
+                            <label for="email">Email:</label>
+                            <p>{{ user.email }}</p>
+                        </div>
+                        <div class="forms">
+                            <label for="event" style="font-weight: 700;">Select Event: </label>
+                            <form method='POST' class="form"> 
+                                {% csrf_token %}
+                                <div class="group">
+                                    <select name="event" required>
+                                        {% for i in events %}
+                                            {% if i.current %}
+                                                <option value="{{ i.id }}">{{ i.title }}</option>
+                                                <!-- <option value="">Select</option> -->
+                                            {% else %}
+                                                <option value="">Select</option>
+                                                <option value="{{ i.id }}">{{ i.title }}</option>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                                <button type="submit" class="btn-blue">Submit</button>
+                            </form>
+                        </div>
+                </div>
+                {% endif %}
+            </div>
+            <div class="download-box">
+                <div>
+                    <h2>Download</h2>
+                    <a href="{% url 'profile-event-report' %}" class="btn-slide2">
+                        <span class="circle2"><i class="bx bx-download"></i></span>
+                        <span class="title2">EVENTS</span>
+                        <span class="title-hover2">Download</span>
+                    </a>
+                    <a href="{% url 'profile-checkins-report' %}" class="btn-slide2">
+                        <span class="circle2"><i class="bx bx-download"></i></span>
+                        <span class="title2">CHECKINS</span>
+                        <span class="title-hover2">Download</span>
+                    </a>
+                    <a href="{% url 'profile-invites-report' %}" class="btn-slide2">
+                        <span class="circle2"><i class="bx bx-download"></i></span>
+                        <span class="title2">INVITES</span>
+                        <span class="title-hover2">Download</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </body>
+{% endblock %}

@@ -1,0 +1,238 @@
+
+body {
+	font-family: 'Roboto', sans-serif;
+	font-weight: 400;
+	line-height: 1.7;
+	box-sizing: border-box;
+	background: rgba(5,14,51,0.9);
+}
+.content {
+    margin: 0 0 0 13em;
+	display: flex;
+	flex-direction: row;
+}
+
+.content .download-box {
+	width: 30%;
+	padding: 40px;
+	margin:48px;
+	text-align: center;
+	background: rgba(255,255,255,0.16);
+	box-sizing: border-box;
+	box-shadow: 0 15px 25px rgba(0,0,0,.4);
+	border-radius: 10px;
+}
+
+.content  .download-box h2 {
+	font-size: 1.6rem;;
+	  margin: 0 0 36px;
+	  padding: 0;
+	  color: #FFFAFF;
+	  text-align: center;
+  }
+
+.content .profile-box {
+	width: 70%;
+	padding: 40px;
+	margin:48px;
+	background: rgba(255,255,255,0.16);
+	box-sizing: border-box;
+	box-shadow: 0 15px 25px rgba(0,0,0,.4);
+	border-radius: 10px;
+}
+.content  .profile-box h2 {
+  font-size: 1.6rem;;
+	margin: 0 0 36px;
+	padding: 0;
+	color: #FFFAFF;
+	text-align: left;
+}
+
+.content  .profile-box .user-box {
+	position: relative;
+    display: flex;
+    flex-direction: row;
+    background: transparent;
+    text-align: left;
+}
+
+.content .profile-box .user-box label, p {
+	width: 100%;
+    padding: 1rem 0 0 0;
+	font-size: 16px;
+	color: #FFFAFF;
+	margin-bottom: 16px;
+    text-align: left;
+
+}
+.profile-box input, .profile-box select {
+	width: 100%;
+	padding: 10px 10px;
+	font-size: 16px;
+    color: #FFFAFF;
+	margin-bottom: 30px;
+	border: none;
+	border: 1px solid #FFFAFF;
+	outline: none;
+    border-radius: 5px;
+	background: rgba(136, 217, 241, 0.1);
+}
+.profile-box select option {
+    color: black;
+}
+.profile-box .form-group {
+	position: relative;
+}
+
+
+.profile-box label {
+	position: relative;
+	top: 0;
+	left: 0;
+	padding: 10px 0;
+	font-size: 16px;
+    color: #FFFAFF;
+	pointer-events: none;
+	transition: .5s;
+}
+
+.profile-box input:focus ~ label, .profile-box input:valid ~ label {
+	top: -20px; 
+	left: 0px; 
+    color: #FFFAFF;
+	font-size: 12px;
+}
+
+/* Download */
+.btn-slide2 {
+    position: relative;
+    display: inline-block;
+    height: 50px;
+    width: 200px;
+    line-height: 50px;
+    padding: 0;
+    border-radius: 50px;
+    background: #FFFAFF;
+    border: 2px solid #99d2ff;
+    margin: 10px;
+    transition: .5s;
+}
+
+.btn-slide2 {
+    border: 2px solid #99d2ff;
+}
+
+.btn-slide2:hover {
+    background-color: #99d2ff;
+}
+
+.btn-slide2:hover span.circle2 {
+    left: 100%;
+    margin-left: -45px;
+    background-color: #FFFAFF;
+    color: #99d2ff;
+}
+
+.btn-slide2:hover span.circle2 {
+    color: rgba(5,14,51,1);
+}
+
+.btn-slide2:hover span.title2 {
+    left: 40px;
+    opacity: 0;
+}
+.btn-slide2:hover span.title-hover2 {
+    opacity: 1;
+    left: 40px;
+}
+
+.btn-slide2 span.circle2 {
+    display: block;
+    background-color: #99d2ff;
+    color: rgba(5,14,51,1);
+    position: absolute;
+    float: left;
+    margin: 3px;
+    line-height: 42px;
+    height: 40px;
+    width: 40px;
+    top: 0;
+    left: 0;
+    transition: .5s;
+    border-radius: 50%;
+}
+
+.btn-slide2 span.circle2 i {
+	position: absolute;
+	left: 36%;
+	top: 36%;
+}
+
+.btn-slide2 span.title2, .btn-slide2 span.title-hover2 {
+    position: absolute;
+    left: 90px;
+    text-align: center;
+    margin: 0 auto;
+    font-size: 16px;
+    font-weight: bold;
+    color: #99d2ff;
+    transition: .5s;
+}
+
+.btn-slide2 span.title2,.btn-slide2 span.title-hover2 {
+    color: rgba(5,14,51,1);
+    left: 80px;
+  }
+.btn-slide2 span.title-hover2 {
+    left: 80px;
+    opacity: 0;
+}
+.btn-slide2 span.title-hover2 {
+    color: rgba(5,14,51,1);
+}
+
+/* FORM */
+.btn-blue {
+    background-color: rgb(11, 19, 31);
+    color: #88D9F1; 
+    border:none;
+}
+.btn-blue:hover {
+    background-color: #88D9F1;
+    color: rgb(11, 19, 31); 
+}
+
+.forms {
+    width: 100%;
+    justify-content: center;
+}
+.form {
+    margin: auto;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    font-size: 1em;
+}
+.group {
+    width: 100%;
+    margin-top: 2.6em;
+    margin-right: 2em;
+    display: flex;
+    flex-direction: row;
+}
+select {
+    width: 72px;
+    background-color: rgba(0,0,0,.02);
+    color: #FFFAFF;
+}
+option {
+    color: black;
+}
+.form button {
+    width: 72px;
+    height: 48px;
+    border-radius: 5px;
+    margin-top: 2.6em;
+    padding: 0 0.5em 0 0.5em;
+}

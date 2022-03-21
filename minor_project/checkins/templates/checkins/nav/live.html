@@ -1,0 +1,21 @@
+{% extends "checkins/nav/navbar.html" %}
+{% load static%}
+{% block head %}
+    <link rel="stylesheet" href="{% static 'checkins/nav/navbar-styles.css' %}">
+	<link rel="stylesheet" href="{% static 'checkins/nav/facereco-styles.css' %}">
+{% endblock %}
+{% block main %}
+<body style="background-image: url({% static 'media/body-bg.svg' %}); " >
+    
+    <div class="container">
+        <div class="box1">
+            <img src="{% url 'video_feed' %}" alt="video feed">
+        </div>
+        <div class="box2">
+            <a class="start box21 tooltip" href="{% url 'live' %}"><i class='bx bx-play-circle'></i> <span class="tooltiptext">Start FR</span></a>
+            <a class="box22 tooltip" href="{% url 'facereco' %}"><i class='bx bx-stop-circle'></i> <span class="tooltiptext">Stop FR</span></a>
+            <a class="box23 tooltip" href="{% url 'qr' %}"><i class='bx bx-scan'></i> <span class="tooltiptext">Scan QR</span></a>
+        </div>
+    </div>
+</body>
+{% endblock %}

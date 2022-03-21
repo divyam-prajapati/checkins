@@ -1,0 +1,47 @@
+{% extends "checkins/nav/navbar.html" %}
+{% load static%}
+{% block head %}
+    <link rel="stylesheet" href="{% static 'checkins/nav/navbar-styles.css' %}">
+	<link rel="stylesheet" href="{% static 'checkins\nav\qr-styles.css' %}">
+    <script src="https://rawgit.com/schmich/instascan-builds/master/instascan.min.js"></script>
+{% endblock %}
+{% block main %}
+    <body style="background-image: url({% static 'media/body-bg.svg' %});">    
+        <div class="container">
+
+            <div class="box1">
+                <video id="preview"></video>
+            </div>
+            <div class="box2">
+                <a class="start box21 tooltip" href="{% url 'qr-scan' %}"><i class='bx bx-play-circle'></i> <span class="tooltiptext">Start</span></a>
+                <a class="box22 tooltip" href="{% url 'qr' %}"><i class='bx bx-stop-circle'></i> <span class="tooltiptext">Stop</span></a>
+            </div>
+        </div>
+        <form action="{% url 'qr-scan' %}" method="post" name="theForm" style="visibility: hidden;">
+            {% csrf_token %}
+            <input type="text" name="name" id="name"/>
+        </form>
+    </body>
+{% endblock %}
+<script>
+{% block jquery %}
+        var scanner = new Instascan.Scanner({ video: document.getElementById('preview'), scanPeriod: 5, mirror: false });
+        scanner.addListener('scan',function(content){
+            document.getElementById("name").value = content;
+            document.theForm.submit();
+            console.log(content);
+            //window.location.href=content;
+        });
+        Instascan.Camera.getCameras().then(function (cameras){
+            if(cameras.length>0){
+                scanner.start(cameras[0]);
+            }else{
+                console.error('No cameras found.');
+                alert('No cameras found.');
+            }
+        }).catch(function(e){
+            console.error(e);
+            alert(e);
+        });   
+{% endblock %}
+</script>

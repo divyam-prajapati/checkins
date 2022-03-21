@@ -1,0 +1,50 @@
+{% extends "checkins/template.html" %}
+{% load static%}
+{% block head %}
+<link rel="stylesheet" href="{% static 'checkins/login-styles.css' %}">
+{% endblock %}
+{% block content %}      
+
+{% load crispy_forms_tags %}
+
+<!--Login--> 
+<main class="main" style="background-image: url({% static 'media/body-bg.svg' %});">
+  
+	<div class="login-box">
+
+		<h1 class="head" style="margin-top: 3em;">Login</h1>
+		
+		<form method="POST" class="form">
+			{% csrf_token %}
+			{{ login_form|crispy }}
+			<p class="fp"><a href="{% url 'password_reset' %}">Forgot password?</a></p>
+			<div class="svg-wrapper">
+				<svg height="40" width="150" xmlns="http://www.w3.org/2000/svg">
+				  <rect id="shape" height="40" width="150"/>
+				  <div id="text">
+					<button type="submit"><span class="spot"></span>Login</button>
+				  </div>
+				</svg>
+			</div>
+			<p class="ca">Don't have an account? <a href="{% url 'register' %}">Create an account</a>.</p>
+		</form>
+
+  	</div>
+	<div id="animation" class="animation"></div>
+</main>
+<!-- https://assets7.lottiefiles.com/packages/lf20_q5pk6p1k.json -->
+{% endblock %}
+<script>
+	{% block jquery %}
+	
+		var animation = bodymovin.loadAnimation({
+		// animationData: { /* ... */ },
+		container: document.getElementById('animation'), // required
+		path: 'https://assets7.lottiefiles.com/packages/lf20_q5pk6p1k.json', // required
+		renderer: 'svg', // required
+		loop: true, // optional
+		autoplay: true, // optional
+		name: "Demo Animation", // optional
+		});
+	{% endblock %}
+</script>

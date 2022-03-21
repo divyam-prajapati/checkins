@@ -1,0 +1,21 @@
+{% extends "checkins/nav/navbar.html" %}
+{% load static%}
+{% block head %}
+    <link rel="stylesheet" href="{% static 'checkins/nav/navbar-styles.css' %}">
+	<link rel="stylesheet" href="{% static 'checkins\nav\qr-styles.css' %}">
+{% endblock %}
+{% block main %}
+    <body style="background-image: url({% static 'media/body-bg.svg' %});">    
+        <div class="container">
+
+            <div class="box1">
+                <img id="placeholderimg" class="placeholder" src="{% static 'media/qr-background.jpg' %}" alt="no state">
+            </div>
+            <div class="box2">
+                <a class="start box21 tooltip" href="{% url 'qr-scan' %}"><i class='bx bx-play-circle'></i> <span class="tooltiptext">Start</span></a>
+                <a class="box22 tooltip" href="{% url 'qr' %}"><i class='bx bx-stop-circle'></i> <span class="tooltiptext">Stop</span></a>
+            </div>
+        </div>
+        
+    </body>
+{% endblock %}

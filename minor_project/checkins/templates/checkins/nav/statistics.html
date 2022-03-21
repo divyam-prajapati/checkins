@@ -1,0 +1,128 @@
+{% extends "checkins/nav/navbar.html" %}
+{% load static%}
+{% block head %}
+    <link rel="stylesheet" href="{% static 'checkins/nav/navbar-styles.css' %}">
+	<link rel="stylesheet" href="{% static 'checkins/nav/statistics-styles.css' %}">
+{% endblock %}
+{% block main %}
+    <body style="background-image: url({% static 'media/body-bg.svg' %});">
+        <div class="graph-wrapper">
+
+            <div class="wrapper">
+                <div class="box">
+                    <canvas id="myChart1" class="graph"></canvas>
+                    <!-- <img src="{% static 'media/background.jpg' %}" style="-webkit-transform: scaleX(-1); transform: scaleX(-1);"> -->
+                </div>
+                <div class="box graph">
+                    <canvas id="myChart2" class="graph"></canvas>
+                    <!-- #{% if gold %}
+                        <canvas id="mbar" class="graph"></canvas>
+                    #{% else %}
+                        <canvas id="mbar" class="graph" style="visibility: hidden;"></canvas> -->
+                        <!-- <img src="{% static 'media/background.jpg' %}"> -->
+                    <!-- #{% endif %} -->
+                </div>
+            </div>
+            <!-- <div class="wrapper">
+                <div class="box">
+                    <img src="{% static 'media/background.jpg' %}" style="-webkit-transform: scaleX(-1); transform: scaleX(-1);">
+                </div>
+                <div class="box">
+                    <img src="{% static 'media/background.jpg' %}">
+                </div>
+            </div> -->
+        </div>
+    </body>
+{% endblock %}
+<script>
+    {% block jquery %}
+    var endpoint = "{% url 'api-chart-data' %}"
+    $.ajax({
+            method: "GET",
+            url: endpoint,
+            success: function(data) {
+                var ctx = document.getElementById('myChart1').getContext('2d');
+                var labels = ["Present", "Absent"]
+                var data = data.chart1
+                // console.log(data)
+                var color = ['#88E0EF', '#161E54'];
+                const config = {
+                    type: 'doughnut',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            label: 'Present vs Absent Current Event',
+                            data: data,
+                            backgroundColor: color,
+                            hoverOffset: 4,
+                            borderColor: "rgba(5,14,51,0.1)",   
+                        }]
+                    },
+                    options: {
+                        legend: {
+                            labels: {
+                                fontColor: "rgba(5,14,51,1)",
+                                fontSize: 12,
+                            }
+                        },
+                        scales: {
+                            ticks: {
+                                fontColor: "rgba(5,14,51,1)", // this here
+                            },
+                        }   
+                    }
+                };
+                var myChart = new Chart(ctx, config)
+            },
+            error: function(error_data) {
+                console.log("error")
+                console.log(error_data)
+            } 
+        })
+        $.ajax({
+            method: "GET",
+            url: endpoint,
+            success: function(data) {
+                // chart 2
+                var ctxtwo = document.getElementById('myChart2').getContext('2d');
+                var labelstwo = ["FR", "QR", "Both FR & QR","Not Joined"]
+                var datatwo = data.chart2
+                console.log(datatwo)
+                // console.log(data)
+                var colortwo = ['#88E0EF', '#161E54', '#FF5DA2','#FF5151'];
+                const configtwo = {
+                    type: 'doughnut',
+                    data: {
+                        labels: labelstwo,
+                        datasets: [{
+                            label: 'FR vs QR vs Not joined Current Event',
+                            data: datatwo,
+                            backgroundColor: colortwo,
+                            hoverOffset: 4,
+                            borderColor: "rgba(5,14,51,0.1)",   
+                        }]
+                    },
+                    options: {
+                        legend: {
+                            labels: {
+                                fontColor: "rgba(5,14,51,1)",
+                                fontSize: 12,
+                            }
+                        },
+                        scales: {
+                            ticks: {
+                                fontColor: "rgba(5,14,51,1)", // this here
+                            },
+                        }   
+                    }
+                };
+                
+                var myCharttwo = new Chart(ctxtwo, configtwo)
+            },
+            error: function(error_data) {
+                console.log("error")
+                console.log(error_data)
+            } 
+        })
+    {% endblock %}
+</script>
